@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FilmList from '../components/FilmList'
+import AddFilm from '../components/AddFilm'
 
 
 class FilmBox extends Component{
@@ -35,6 +36,13 @@ class FilmBox extends Component{
   }
 ]
     }
+    this.onFilmSubmit = this.onFilmSubmit.bind(this);
+  }
+
+  onFilmSubmit(newFilm){
+    newFilm.id = Date.now();
+    const updatedFilms = [...this.state.data, newFilm];
+    this.setState({data: updatedFilms});
   }
 
   render(){
@@ -43,6 +51,8 @@ class FilmBox extends Component{
       <div>
       <h1>Upcoming Film Releases For Uk</h1>
       <FilmList data={this.state.data}/>
+      <hr/>
+      <AddFilm onFilmSubmit={this.onFilmSubmit}/>
       </div>
     )
   }
